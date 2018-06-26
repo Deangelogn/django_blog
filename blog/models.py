@@ -21,4 +21,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+class Questionary(models.Model):
+    participant_name = models.CharField(max_length=200)
+    participant_age = models.IntegerField(max_length=2)
 # Create your models here.
