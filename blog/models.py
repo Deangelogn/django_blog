@@ -5,6 +5,15 @@ from django.db import models
 from django.utils import timezone
 
 
+STATUS_CHOICES = (
+    (1, ("Not relevant")),
+    (2, ("Review")),
+    (3, ("Maybe relevant")),
+    (4, ("Relevant")),
+    (5, ("Leading candidate"))
+)
+
+
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -21,7 +30,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class Questionary(models.Model):
+
+class Participant(models.Model):
     participant_name = models.CharField(max_length=200)
-    participant_age = models.IntegerField(max_length=2)
+    participant_age = models.IntegerField()
+    extrovertion = models.IntegerField(choices=STATUS_CHOICES, default=1)
+
 # Create your models here.
