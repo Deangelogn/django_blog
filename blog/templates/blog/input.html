@@ -1,0 +1,19 @@
+{% block head %}
+
+<title> Edit Profile </title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1> Enter Body Details </h1>
+    <br>
+    <br>
+    <form method="POST" class="post-form">
+      {% csrf_token %}
+      <ul>
+      {{form.as_ul}}
+      </ul>
+      <button type="submit" class="save btn btn-default">Next</button>
+    </form>
+</div>
+{% endblock %}

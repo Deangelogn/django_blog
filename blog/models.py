@@ -5,15 +5,6 @@ from django.db import models
 from django.utils import timezone
 
 
-STATUS_CHOICES = (
-    (1, ("Not relevant")),
-    (2, ("Review")),
-    (3, ("Maybe relevant")),
-    (4, ("Relevant")),
-    (5, ("Leading candidate"))
-)
-
-
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -34,6 +25,13 @@ class Post(models.Model):
 class Participant(models.Model):
     participant_name = models.CharField(max_length=200)
     participant_age = models.IntegerField()
-    extrovertion = models.IntegerField(choices=STATUS_CHOICES, default=1)
+
+
+class Input(models.Model):
+
+    waist = models.IntegerField(default=0)
+    height = models.IntegerField(default=0)
+
+    type_select = models.BooleanField('Complete', default=True)
 
 # Create your models here.
