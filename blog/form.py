@@ -1,10 +1,12 @@
 from django import forms
 from .models import Post, Participant, Input
-from django.utils.safestring import mark_safe
 
 TYPE_SELECT = (
-    ('0', 'Live'),
-    ('1', 'Test'),
+    ('1', 'Unfriendly'),
+    ('2', ''),
+    ('3', ''),
+    ('4', ''),
+    ('5', 'Friendly'),
 )
 
 
@@ -26,15 +28,20 @@ class NameForm(forms.Form):
     your_name = forms.CharField(label='Your name', max_length=100)
 
 
-class HorizontalRadioRenderer(forms.RadioSelect):
-    def render(self):
-        return mark_safe(u'\n'.join([u'%s\n' % w for w in self]))
+class HorizontalRadioSelect(forms.RadioSelect):
+    template_name = 'blog/horizontal_select.html'
 
 
 class InputForm(forms.ModelForm):
 
-    type_select = forms.ChoiceField(widget=forms.RadioSelect(
-                        renderer=HorizontalRadioRenderer), choices=TYPE_SELECT)
+    type_select =\
+        forms.ChoiceField(choices=TYPE_SELECT, initial=0,
+                          widget=HorizontalRadioSelect)
+
+    # forms.ChoiceField(
+    #     choices=TYPE_SELECT, initial=0,
+    #     widget=forms.RadioSelect(attrs={'class': 'inline'}),
+    #     )
 
     class Meta:
         model = Input
