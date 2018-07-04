@@ -5,23 +5,21 @@ from django.http import HttpResponseRedirect
 from .models import Post
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
-from .form import PostForm, NameForm, InputForm
+from .form import PostForm, NameForm, QuestionnaireForm
 
 # Create your views here.
 
 
-def InputView(request):
+def QuestionnaireView(request):
 
     if request.POST:
-        form = InputForm(request.POST)
+        form = QuestionnaireForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
     else:
-        form = InputForm()
-        # args = {'form': form}
-
-        return render(request, 'blog/post_edit.html',  {'form': form})
+        form = QuestionnaireForm()
+    return render(request, 'blog/base_questionnarie.html',  {'form': form})
 
 
 def get_name(request):
@@ -39,7 +37,6 @@ def get_name(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NameForm()
-
     return render(request, 'blog/name.html', {'form': form})
 
 
@@ -70,7 +67,7 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+        return render(request, 'blog/post_edit.html', {'form': form})
 
 
 def post_edit(request, pk):

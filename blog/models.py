@@ -4,6 +4,31 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 
+EXTRAVERSION_OPTION = (
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5'),
+)
+# Reservado/Carismático
+NEUROTICISM_OPTION = (
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5'),
+)
+# Nervoso/Confiante
+AGREEABLENESS_OPTION = (
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5'),
+)
+# Não-amigável/Amigável
+
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -27,11 +52,13 @@ class Participant(models.Model):
     participant_age = models.IntegerField()
 
 
-class Input(models.Model):
+class Questionnaire(models.Model):
 
-    waist = models.IntegerField(default=0)
-    height = models.IntegerField(default=0)
-
-    type_select = models.BooleanField('Complete', default=True)
+    extraversion = models.CharField(
+        max_length=1, choices=EXTRAVERSION_OPTION, default='1')
+    neuroticism = models.CharField(
+        max_length=1, choices=NEUROTICISM_OPTION, default='1')
+    agreeableness = models.CharField(
+        max_length=1, choices=AGREEABLENESS_OPTION, default='1')
 
 # Create your models here.

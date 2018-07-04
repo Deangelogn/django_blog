@@ -3,6 +3,8 @@
 <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
 {% with id=widget.attrs.id %}
+<div class="row align-items-center justify-content-center">
+  <div class="col-12 align-items-center justify-content-center">
     <ul{% if id %} id="{{ id }}"{% endif %}{% if widget.attrs.class %} class="{{ widget.attrs.class }}"{% endif %}>
         {% for group, options, index in widget.optgroups %}
             {% if group %}
@@ -18,4 +20,6 @@
             {% endif %}
         {% endfor %}
     </ul>
+  </div>
+</div>
 {% endwith %}
